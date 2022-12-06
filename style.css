@@ -28,4 +28,11 @@ th, td {
     padding-left: 15px;
     padding-right: 15px;
     text-align: center;
-  }
+}
+.tred {
+    color: red;
+}
+
+.tgreen {
+    color: green;
+}
