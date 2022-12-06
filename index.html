@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <title>P2</title>
+</head>
+<body>
+    <h1>Portfolio v2.0</h1>
+    <a href="" onclick="">refresh &#8635;</a>
+
+    <div id="tableDiv">
+        <br>
+        <table>
+            <tr>
+              <th>ticker</th>
+              <th>shares</th> 
+              <th>averagePx</th>
+              <th>lastPx</th>
+              <th>PL</th>
+            </tr>
+            <tr>
+                <td class="tt">AAPL</td>
+                <td>10</td>
+                <td>100.25</td>
+                <td>110.25</td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td class="tt">AMZN</td>
+                <td>5</td>
+                <td>40.00</td>
+                <td>51.25</td>
+                <td>56.25</td>
+            </tr>
+            
+          </table>
+    </div>
+
+    <div id="formDiv">
+        <br>
+        <form>
+            <label for="ticker">ticker:</label>
+            <input type="text" id="tickerVal" name="ticker"><br>
+            <label for="price">average price:</label>
+            <input type="price" id="priceVal" name="price"><br>
+            <label for="qty">quantity:</label>
+            <input type="qty" id="qtyVal" name="qty"><br>
+            <input type="submit" value="Buy Order" onclick="buyOrder();">
+            <input type="submit" value="Sell Order" onclick="sellOrder();">
+        </form>
+    </div>
+</body>
+</html>

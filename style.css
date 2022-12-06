@@ -1,0 +1,31 @@
+* {
+    font-family: 'Roboto Mono', monospace;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+a:hover {
+    color:#000; 
+    text-decoration: underline;
+}
+
+input{
+    border: 1px solid #000;
+  }
+
+table {
+    
+}
+
+td.tt { 
+    font-style: italic;
+}
+
+th, td {
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center;
+  }
