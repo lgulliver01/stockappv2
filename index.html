@@ -13,7 +13,7 @@
 <body>
     <h1>Portfolio v2.0</h1>
     <div id="plDiv"></div>
-    <a href="" onclick="">refresh &#8635;</a>
+    <button type="button" class="btn btn-primary" onclick="updatePrices()">update prices</button>
     <div id="tableDiv"></div>
     <!-- <div id="tableDiv2">
         <br>
@@ -47,13 +47,14 @@
         <br>
         <form>
             <label for="ticker">ticker:</label>
-            <input type="text" id="tickerVal" name="ticker"><br>
+            <input type="text" id="tickerVal" name="ticker" placeholder="(String) e.g. AAPL" required pattern="[a-zA-Z]*"><br>
             <label for="price">average price:</label>
-            <input type="price" id="priceVal" name="price"><br>
+            <input type="price" id="priceVal" name="price" placeholder="(Decimal) e.g. 100.25" required pattern="[0-9]*\.?[0-9]*"><br>
             <label for="qty">quantity:</label>
-            <input type="qty" id="qtyVal" name="qty"><br>
-            <input type="submit" value="Buy Order" onclick="buyOrder();">
-            <input type="submit" value="Sell Order" onclick="sellOrder();">
+            <input type="qty" id="qtyVal" name="qty" placeholder="(Integer) e.g. 10" required pattern="[0-9]*"><br>
+            <input type="submit" value="Buy Order" onclick="buyOrder()">
+            <input type="submit" value="Sell Order" onclick="sellOrder()">
+            <input type="submit" value="Clear localstorage (debug)" onclick="window.localStorage.clear();">
         </form>
     </div>
 </body>
