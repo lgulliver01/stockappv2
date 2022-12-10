@@ -48,7 +48,17 @@ function drawTable() {
 function drawPL() {
     var plDiv = document.getElementById('plDiv');
     ovrPL < 0 ? plDiv.style.color = 'red' : plDiv.style.color = 'green';
-    plDiv.innerHTML = `<h3>Overall P/L: ${ovrPL}</h3>`;
+    plDiv.innerHTML = "<h3>Realized P/L: " + ovrPL.toLocaleString("en-US", { maximumFractionDigits: 2, minimumFractionDigits: 2 }); + "</h3>";
+}
+
+function drawFakePL() {
+    var plDiv = document.getElementById('fakePlDiv');
+    var fakePL = 0;
+    data.forEach(element => {
+        fakePL += element.PL;
+    });
+    fakePL < 0 ? plDiv.style.color = 'red' : plDiv.style.color = 'green';
+    plDiv.innerHTML = "<h3>Unrealized P/L: " + fakePL.toLocaleString("en-US", { maximumFractionDigits: 2, minimumFractionDigits: 2 }); + "</h3>";
 }
 
 window.onload = function () {
@@ -87,6 +97,7 @@ window.onload = function () {
     console.log(ovrPL);
 
     drawPL();
+    drawFakePL();
     drawTable();
 }
 
@@ -117,13 +128,47 @@ window.onload = function () {
         }
         save();
         location.reload();
+        updatePrices();
+    }
+
+    function sellOrder() {
+        //updatePrices();
+        var ticker = document.getElementById("tickerVal").value.toUpperCase();
+        var shares = document.getElementById("qtyVal").value;
+        var price = document.getElementById("priceVal").value;
+
+        data.forEach(element => {
+            if (element.ticker == ticker) {
+                found = true;
+                var newShares = element.shares - parseInt(shares);
+                if (newShares < 0) {
+                    alert("You don't have enough shares to sell!");
+                    return;
+                }
+                ovrPL = parseFloat(ovrPL) + ((price - element.averagePx) * shares);
+                //ovrPL += (element.PL * (shares / element.shares));
+                element.shares = newShares;
+                if (newShares == 0) {
+                    const index = data.indexOf(element);
+                    if (index > -1) { // only splice array when item is found
+                        data.splice(index, 1); // 2nd parameter means remove one item only
+                    }
+
+                }
+            }
+        });
+        if (!found) {
+            alert("Ticker not found");
+        }
+        save();
+        location.reload();
+        updatePrices();
     }
 
     function updatePrices() {
         data.forEach(element => {
             getPriceApi(element);
         });
-
     }
 
     function getPriceApi(element) {
@@ -135,6 +180,8 @@ window.onload = function () {
               console.log(element.ticker + " " + currPx);
             element.PL = (currPx - element.averagePx) * element.shares;
             drawTable();
+            drawFakePL();
+            drawPL();
             save();
         });
     }
