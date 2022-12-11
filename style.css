@@ -37,7 +37,7 @@ th, td {
     color: green;
 }
 
-.updatedDiv {
+#updatedDiv {
     font-size: 8pt;
     color: gray;
 }

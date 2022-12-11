@@ -61,6 +61,19 @@ function drawFakePL() {
     plDiv.innerHTML = "<h3>Unrealized P/L: " + fakePL.toLocaleString("en-US", { maximumFractionDigits: 2, minimumFractionDigits: 2 }); + "</h3>";
 }
 
+function drawUpdateTime() {
+    var dString = window.localStorage.getItem('dString');
+    var updatedDiv = document.getElementById("updatedDiv");
+    updatedDiv.innerHTML = "<p>last updated at "+ dString +"</p>";
+}
+
+function drawAll() {
+    drawPL();
+    drawFakePL();
+    drawUpdateTime();
+    drawTable();
+}
+
 window.onload = function () {
     if (window.localStorage.getItem('data') == null) {
         data = JSON.parse(`[
@@ -96,9 +109,7 @@ window.onload = function () {
     console.log(data);
     console.log(ovrPL);
 
-    drawPL();
-    drawFakePL();
-    drawTable();
+    drawAll();
 }
 
     function buyOrder() {
@@ -179,9 +190,7 @@ window.onload = function () {
             element.lastPx = currPx;
               console.log(element.ticker + " " + currPx);
             element.PL = (currPx - element.averagePx) * element.shares;
-            drawTable();
-            drawFakePL();
-            drawPL();
+            drawAll();
             save();
         });
     }
@@ -189,6 +198,8 @@ window.onload = function () {
     function save() {
         window.localStorage.setItem("data", JSON.stringify(data));
         window.localStorage.setItem("ovrPL", ovrPL);
+        window.localStorage.setItem("dString", new Date().toISOString());
+        drawAll();
     }
 
 
