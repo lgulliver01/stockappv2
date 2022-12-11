@@ -36,3 +36,8 @@ th, td {
 .tgreen {
     color: green;
 }
+
+.updatedDiv {
+    font-size: 8pt;
+    color: gray;
+}
